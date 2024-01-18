@@ -1,0 +1,51 @@
+# ===================================================================
+# Server specific properties
+# ===================================================================
+server:
+  port: 8000
+  error:
+    include-stacktrace: never
+# ===================================================================
+# Spring specific properties
+# ===================================================================
+spring:
+  application:
+    name: stripe-service
+  datasource:
+    platform: mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/stripe_service}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+
+  jpa:
+    show-sql: false
+    open-in-view: false
+    properties:
+      dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+
+application:
+  jwt:
+    base-64-secret: ${JWT_BASE_64_SECRET:eGNoanU4YWhkZnV5aWFzaGRpdWFzaGJkaXVhc2hkYml1YXNkaHVpYXNkYXNoZHVpYXNoZCB1aWFzaGR1aWFzdWRoYXN1aWRoYXVpcw==}
+    token-validity-in-seconds: ${JWT_VALIDITY_IN_SECONDS:3600}
+  cors:
+    allowed-origins: ${CORS_ALLOW_ORIGINS:http://localhost:3000}
+    allowed-methods: ${CORS_ALLOW_METHODS:*}
+    allowed-headers: ${CORS_ALLOW_HEADERS:*}
+    exposed-headers: ${CORS_EXPOSED_HEADERS:*}
+    allow-credentials: ${CORS_ALLOW_CREDENTIALS:true}
+  gateway:
+    url: ${GATEWAY_URL:http://localhost:8000/}
+
+stripe:
+  keys:
+    public: ${STRIPE_PUBLIC_KEY:pk_test_51M1joFFxmXEqCrlHEQJaweGDQZCI4PbEuLsGdrRNqCuMLs7PcPcNfCMjmqWqM453M7MWtxbKvVlRzi24yUhXyt6Y00vIVTjUMU}
+    secret: ${STRIPE_SECRET_KEY:sk_test_51M1joFFxmXEqCrlHj7O7LDpNgxVPpMG8xakc8gAQBcRHg0u5GqvkH9MBnmPum1AIqaZGdZBV0p2e2GY1oXBtn86D00Ht7rCzpU}
+  webhook:
+    endpoint-url: ${ENDPOINT_URL:http://localhost:8000}
+    endpoint-secret: ${ENDPOINT_SECRET:whsec_f5c95d72e6fa393b492a9c69555f287020bc80c11b58976feb03854200dd1549}
