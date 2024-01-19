@@ -1,2 +1,8 @@
-FROM 948579270262.dkr.ecr.ap-southeast-1.amazonaws.com/java-base:v0.0.3
-ADD target/stripe-service-0.0.1-SNAPSHOT.jar $JAR_PATH
+FROM maven:3.8-openjdk-11 AS build
+COPY . .
+RUN mvn clean package -DskipTests
+
+FROM openjdk:11-jdk-slim-buster
+COPY --from=build /target/shopee-service-0.0.1-SNAPSHOT.jar shopee-service.jar
+EXPOSE 8000
+ENTRYPOINT ["java","-jar","shopee-service.jar"]
