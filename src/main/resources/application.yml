@@ -11,12 +11,19 @@ server:
 spring:
   application:
     name: stripe-service
+  # datasource:
+  #   platform: mysql
+  #   driver-class-name: com.mysql.jdbc.Driver
+  #   url: ${DB_URL:jdbc:mysql://localhost:3306/stripe_service}
+  #   username: ${DB_USERNAME:root}
+  #   password: ${DB_PASSWORD:root}
+
   datasource:
     platform: mysql
-    driver-class-name: com.mysql.jdbc.Driver
-    url: ${DB_URL:jdbc:mysql://localhost:3306/stripe_service}
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:root}
+    url: ${DB_URL:jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12677445}
+    username: sql12677445
+    password: tlZCYAuQ6a
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     show-sql: false
@@ -25,6 +32,7 @@ spring:
       dialect: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: update
+
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
